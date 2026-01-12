@@ -1,0 +1,115 @@
+.values {
+    background: var(--color-black);
+}
+
+.values .section-title {
+    margin-bottom: var(--space-3xl);
+}
+
+/* Values Grid */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2xl);
+}
+
+.value-card {
+    background: linear-gradient(135deg, var(--color-charcoal) 0%, rgba(26, 26, 26, 0.5) 100%);
+    border: 1px solid var(--color-gunmetal);
+    padding: var(--space-2xl);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: slideUp 0.6s ease-out forwards;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.value-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+    transition: left var(--transition-base);
+}
+
+.value-card:hover {
+    border-color: var(--color-white);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.08);
+}
+
+.value-card:hover::before {
+    left: 100%;
+}
+
+.value-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.value-icon {
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--color-white);
+    margin-bottom: var(--space-lg);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+}
+
+.value-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+    color: var(--color-white);
+}
+
+.value-card p {
+    font-size: 0.95rem;
+    color: var(--color-light-gray);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+
+    .value-card {
+        padding: var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .value-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .value-card p {
+        font-size: 0.9rem;
+    }
+}

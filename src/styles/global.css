@@ -1,0 +1,222 @@
+/* Global Styles */
+
+.app {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Sections */
+section {
+    width: 100%;
+    padding: var(--space-4xl) 0;
+}
+
+section:nth-child(even) {
+    background-color: var(--color-charcoal);
+}
+
+/* Section title styling */
+.section-title {
+    position: relative;
+    margin-bottom: var(--space-3xl);
+    display: inline-block;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-white) 0%, transparent 100%);
+}
+
+/* Grid layouts */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-2xl);
+    align-items: center;
+}
+
+.grid-col-6 {
+    grid-column: span 6;
+}
+
+.grid-col-4 {
+    grid-column: span 4;
+}
+
+/* Cards */
+.card {
+    background: var(--color-black);
+    border: 1px solid var(--color-gunmetal);
+    padding: var(--space-2xl);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    border-color: var(--color-light-gray);
+    box-shadow: 0 16px 32px rgba(255, 255, 255, 0.05);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: var(--space-md) var(--space-xl);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 2px solid var(--color-white);
+    background: transparent;
+    color: var(--color-white);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-white);
+    transition: left var(--transition-base);
+    z-index: -1;
+}
+
+.btn:hover {
+    color: var(--color-black);
+}
+
+.btn:hover::before {
+    left: 0;
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--color-white);
+    color: var(--color-black);
+    border-color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+/* Divider */
+.divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--color-gunmetal) 50%, transparent 100%);
+    margin: var(--space-4xl) 0;
+}
+
+/* Text utilities */
+.text-accent {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-light-gray);
+    margin-bottom: var(--space-md);
+}
+
+.text-muted {
+    color: var(--color-light-gray);
+}
+
+/* Animations */
+.fade-up {
+    animation: fadeUp 0.6s ease-out;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    section {
+        padding: var(--space-3xl) 0;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-lg);
+    }
+
+    .grid-col-6,
+    .grid-col-4 {
+        grid-column: span 4;
+    }
+
+    .card {
+        padding: var(--space-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .grid-col-6,
+    .grid-col-4 {
+        grid-column: span 1;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .divider {
+        margin: var(--space-2xl) 0;
+    }
+}
