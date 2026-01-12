@@ -42,11 +42,11 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="hero-ctas fade-in" style={{ animationDelay: '0.3s' }}>
-            <button className="btn btn-primary" onClick={() => document.querySelector('.about').scrollIntoView({ behavior: 'smooth' })}>
-              Explore
+            <button className="btn btn-primary" onClick={() => window.location.hash = '/shop'}>
+              Shop Now
             </button>
-            <button className="btn" onClick={() => document.querySelector('.cta').scrollIntoView({ behavior: 'smooth' })}>
-              Get Involved
+            <button className="btn" onClick={() => document.querySelector('.about').scrollIntoView({ behavior: 'smooth' })}>
+              About Us
             </button>
           </div>
         </div>
