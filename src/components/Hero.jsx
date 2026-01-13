@@ -42,7 +42,13 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="hero-ctas fade-in" style={{ animationDelay: '0.3s' }}>
-            <button className="btn btn-primary" onClick={() => window.location.hash = '/shop'}>
+            <button className="btn btn-primary" onClick={() => {
+              window.location.hash = '#/shop';
+              // Force a slight delay to ensure hash change is registered
+              setTimeout(() => {
+                window.dispatchEvent(new HashChangeEvent('hashchange'));
+              }, 0);
+            }}>
               Shop Now
             </button>
             <button className="btn" onClick={() => document.querySelector('.about').scrollIntoView({ behavior: 'smooth' })}>

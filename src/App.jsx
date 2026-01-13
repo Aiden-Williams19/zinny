@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CartProvider } from './context/CartContext'
+import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Vision from './components/Vision'
@@ -11,14 +12,22 @@ import './styles/global.css'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [currentView, setCurrentView] = useState('home') // 'home' or 'shop'
+  const [currentView, setCurrentView] = useState(() => {
+    // Initialize based on current hash
+    return window.location.hash === '#/shop' ? 'shop' : 'home'
+  })
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
 
-    // Handle hash-based routing for Shop
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Handle hash-based routing - separate effect for better reactivity
+  useEffect(() => {
     const handleHashChange = () => {
       if (window.location.hash === '#/shop') {
         setCurrentView('shop')
@@ -28,20 +37,13 @@ function App() {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
     window.addEventListener('hashchange', handleHashChange)
-    
-    // Check initial hash on mount
-    handleHashChange()
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('hashchange', handleHashChange)
-    }
+    return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
   return (
     <CartProvider>
+      <Navbar currentView={currentView} onNavigate={setCurrentView} />
       {currentView === 'home' ? (
         <main className="app">
           <Hero />
