@@ -24,7 +24,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="hero-content">
-        <div className="container">
+        <div className="container hero-container">
           {/* Tagline */}
           <div className="text-accent fade-in">
             Creative Culture
@@ -40,20 +40,26 @@ export default function Hero() {
             Bold. Disruptive. Modern. Confident.
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - Primary Navigation */}
           <div className="hero-ctas fade-in" style={{ animationDelay: '0.3s' }}>
-            <button className="btn btn-primary" onClick={() => {
+            <a href="#/shop" className="btn btn-primary" onClick={(e) => {
+              e.preventDefault();
               window.location.hash = '#/shop';
-              // Force a slight delay to ensure hash change is registered
               setTimeout(() => {
                 window.dispatchEvent(new HashChangeEvent('hashchange'));
               }, 0);
             }}>
-              Shop Now
-            </button>
-            <button className="btn" onClick={() => document.querySelector('.about').scrollIntoView({ behavior: 'smooth' })}>
-              About Us
-            </button>
+              → Shop Now
+            </a>
+            <a href="#/about" className="btn btn-secondary" onClick={(e) => {
+              e.preventDefault();
+              const aboutElement = document.querySelector('.about');
+              if (aboutElement) {
+                aboutElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }}>
+              ↓ About the Brand
+            </a>
           </div>
         </div>
       </div>
